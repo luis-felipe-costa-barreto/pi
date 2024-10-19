@@ -23,6 +23,7 @@ from loja.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('biblioteca/', biblioteca, name='biblioteca'),
 ]
 
 if settings.DEBUG:
