@@ -24,6 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('biblioteca/', biblioteca, name='biblioteca'),
+    path('pagina_jogo/<int:id>', pagina_jogo, name='pagina_jogo'),
+    path('cadastro/', cadastro, name='cadastro'),
+    path('login/', login, name='login'),
+    path('compra_jogo/<int:jogo_id>/', compra_jogo, name='compra_jogo'),
+    path('excluir_conta/', excluir_conta, name='excluir_conta'),
 ]
 
 if settings.DEBUG:

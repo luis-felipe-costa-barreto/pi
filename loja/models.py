@@ -36,5 +36,6 @@ class Usuario(models.Model):
     nome_usuario = models.CharField(max_length=50, null=False)
     perfil = models.ImageField(upload_to='perfis/')
     jogos = models.ManyToManyField(Jogo)
+    conta = models.FloatField(default=1000)
     def __str__(self):
         return self.nome

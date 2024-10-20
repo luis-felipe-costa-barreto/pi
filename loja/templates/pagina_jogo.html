@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="container">
+        <img src="{{jogo.imagem.url}}" width="220px" height="280px">
+        <div>
+            <h2>{{jogo.nome}}</h2>
+            <p>{{jogo.empresa}}</p>
+            <p id="descricao">{{jogo.descricao}}</p>
+            <p>R${{jogo.valor}}</p>
+            <a href="{% url 'compra_jogo' jogo.id %}"><button>Comprar</button></a>
+        </div>
+    </div>
+    <style>
+        #descricao{
+            font-size: 14px;
+            color: rgb(102,102,102);
+        }
+        #container{
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        #container div a{
+            text-decoration: none;
+        }
+        button{
+            cursor: pointer;
+            background-color: #003DBF;
+            color: white;
+            border: none;
+            width: 80px;
+            height: 30px;
+            border-radius: 5px;
+            transition: 0.1s;
+        }
+        button:hover{
+            background-color: #1d54ca;
+        }
+    </style>
+{% endblock %}

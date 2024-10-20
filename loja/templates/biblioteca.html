@@ -1,5 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>rola</h1>
+    <div id="lista">
+        {% for jogo in jogos %}
+            {% if jogo in lista %}
+                <img src="{{jogo.imagem.url}}" width="220px" height="280">
+            {% endif %}
+        {% endfor %}
+    </div>
+    <a href="{% url 'excluir_conta' %}" id="excluir"><button>Excluir Conta</button></a>
+    <style>
+        #lista{
+            display: flex;
+            padding: 30px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        #lista img{
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        #lista img:hover{
+            transform: scale(1.05);
+        }
+        #excluir{
+            margin-left: 30px;
+        }
+        #excluir button{
+            background-color: red;
+            color: white;
+            border: 3px solid white;
+            width: 110px;
+            height: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 3px 3px 5px gray;
+            transition: 0.1s;
+        }
+        #excluir button:hover{
+            background-color: rgb(255, 74, 74);
+        }
+    </style>
 {% endblock %}
