@@ -30,6 +30,35 @@ def pagina_jogo(request, id):
     }
     return render (request, 'pagina_jogo.html', contexto)
 
+def filtro(request, id):
+    if 'usuario_id' not in request.session:
+        return redirect('login')
+    usuario_id = request.session['usuario_id']
+    tema = get_object_or_404(Tema, id = id)
+    contexto = {
+        'tema': tema,
+        'jogos': Jogo.objects.all(),
+        'usuario': Usuario.objects.get(id=usuario_id),
+        'temas': Tema.objects.all(),
+        'generos': Genero.objects.all(),
+    }
+    return render(request, 'filtro.html', contexto)
+
+def filtro2(request, id):
+    if 'usuario_id' not in request.session:
+        return redirect('login')
+    usuario_id = request.session['usuario_id']
+    genero = get_object_or_404(Genero, id = id)
+    contexto = {
+        'genero': genero,
+        'jogos': Jogo.objects.all(),
+        'usuario': Usuario.objects.get(id=usuario_id),
+        'temas': Tema.objects.all(),
+        'generos': Genero.objects.all(),
+    }
+    return render(request, 'filtro2.html', contexto)
+
+
 def biblioteca(request):
     if 'usuario_id' not in request.session:
         return redirect('login')

@@ -4,17 +4,22 @@ body{
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    background-image: url(../img/Indie\ Game\ Background.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 5px solid black;
+    border: 5px solid white;
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
     justify-content: center;
     align-content: center;
+    background-color: rgb(0, 170, 170);
+    color: white;
 }
 
 label{
@@ -23,7 +28,34 @@ label{
 
 input{
     width: 95%;
+    color: white;
+}
+input:focus{
+    outline: 2px solid white;
 }
 input:not(#perfil){
-    height: 20px;
+    height: 25px;
+    background-color: rgb(14, 109, 109);
+    border: none;
+    border-radius: 5px;
+}
+.titulo{
+    font-weight: bold;
+    font-size: 30px;
+}
+button{
+    color: white;
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgb(14, 109, 109);
+    cursor: pointer;
+    transition: 0.2s;
+}
+button:hover{
+    background-color: rgb(19, 148, 148);
+}
+input::placeholder{
+    color: white;
 }
