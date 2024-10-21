@@ -84,7 +84,6 @@
             padding: 30px 30px;
         }
         #principal input{
-            margin-bottom: 10px;
             width: 400px;
             height: 30px;
             background-color: #D9D9D9;
@@ -95,13 +94,9 @@
         #principal > img{
             max-width: 90%;
             position: relative;
-            margin: 15px 4.5vw;
+            margin: 30px auto;
+            display: block;
+            cursor: pointer;
         }
     </style>
-    <script>
-        function redirecionar(){
-            window.location.href = "{% url 'biblioteca' %}"
-        }
-
-    </script>
 {% endblock %}
