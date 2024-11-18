@@ -3,14 +3,22 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
+from django.core.paginator import Paginator
 # Create your views here.
 def index(request):
     if 'usuario_id' not in request.session:
         return redirect('login')
     usuario_id = request.session['usuario_id']
+    jogos_lista = Jogo.objects.all().order_by('nome')
+    paginator = Paginator(jogos_lista, 1)
+    page = request.GET.get('page', 1)
+    try:
+        jogos = paginator.page(page)
+    except:
+        jogos = paginator.page(1)
     
     contexto = {
-        'jogos': Jogo.objects.all(),
+        'jogos': jogos,
         'generos': Genero.objects.all(),
         'temas': Tema.objects.all(),
         'usuario': Usuario.objects.get(id=usuario_id)
