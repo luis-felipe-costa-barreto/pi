@@ -13,6 +13,7 @@
             {% endfor %}
         </navbar>
         <div id="principal">
+            <h1>{{genero.nome}}</h1>
             {% for jogo in jogos %}
                 {% if genero in jogo.generos.all %}
                     <a id="jogos" href="{% url 'pagina_jogo' jogo.id %}">
@@ -28,6 +29,11 @@
         </div>
     </div>
     <style>
+        h1{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
         #descricao{
             font-size: 14px;
             color: rgb(102, 102, 102);
