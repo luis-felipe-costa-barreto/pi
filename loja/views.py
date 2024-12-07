@@ -172,3 +172,23 @@ def perfil(request):
         'lista': usuario.jogos.all()
     }
     return render (request, 'perfil.html', contexto)
+
+def mercado(request):
+    if 'usuario_id' not in request.session:
+        return redirect('login')
+    usuario_id = request.session['usuario_id']
+    usuario = Usuario.objects.get(id=usuario_id)
+    jogos_lista = Jogo.objects.all().order_by('nome')
+    form = Porcurarjogo(request.GET or None)
+    if form.is_valid():
+        nome = form.cleaned_data.get('nome')
+        if nome:
+            jogos_lista = jogos_lista.filter(nome__icontains=nome)
+    contexto = {
+        'usuario': usuario,
+        'generos': Genero.objects.all(),
+        'temas': Tema.objects.all(),
+        'jogos': jogos_lista,
+        'form': form
+    }
+    return render (request, 'mercado.html', contexto)
