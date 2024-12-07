@@ -160,3 +160,15 @@ def excluir_conta(request):
         return redirect('login')
 
     return render(request, 'confirmar_exclusao.html', {'usuario': usuario})
+
+def perfil(request):
+    if 'usuario_id' not in request.session:
+        return redirect('login')
+    usuario_id = request.session['usuario_id']
+    usuario = Usuario.objects.get(id=usuario_id)
+    contexto = {
+        'usuario' : usuario,
+        'jogos': Jogo.objects.all(),
+        'lista': usuario.jogos.all()
+    }
+    return render (request, 'perfil.html', contexto)

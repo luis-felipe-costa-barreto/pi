@@ -2,12 +2,12 @@
 
 {% block content %}
     <div id="container">
-        <navbar>
-            <p>Gêneros</p>
+        <navbar id="navbar">
+            <p><span>Gêneros</span></p>
             {% for genero in generos %}
                 <a href="{% url 'filtro2' genero.id %}"><li>{{genero.nome}}</li></a>
             {% endfor %}
-            <p>Temas</p>
+            <p><span>Temas</span></p>
             {% for tema in temas %}
                 <a href="{% url 'filtro' tema.id %}"><li>{{tema.nome}}</li></a>
             {% endfor %}
@@ -55,7 +55,7 @@
             grid-template-columns: repeat(7, 1fr);
             height: 100%;
         }
-        navbar{
+        #navbar{
             background-color: #002C89;
             grid-column: 1/2;
             height: 100%;
@@ -65,22 +65,28 @@
             align-items: center;
             list-style: none;
         }
-        navbar p{
+        #navbar p{
             font-size: 18px;
         }
-        navbar a {
+        #navbar a {
             text-decoration: none;
             color: white;
         }
-        navbar li{
+        #navbar li{
             margin-bottom: 5px;
         }
-        navbar li:hover{
+        #navbar li:hover{
             border-bottom: 1px solid white;
         }
         #principal{
             grid-column: 2/8;
             padding: 30px 30px;
+        }
+        #navbar p{
+            margin: 1rem 0;
+        }
+        span{
+            font-weight: 500;
         }
     </style>
     

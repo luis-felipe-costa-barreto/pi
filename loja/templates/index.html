@@ -5,11 +5,11 @@
     {% load static %}
     <div id="container">
         <navbar id="navbar">
-            <p>Gêneros</p>
+            <p><span>Gêneros</span></p>
             {% for genero in generos %}
                 <a href="{% url 'filtro2' genero.id %}"><li>{{genero.nome}}</li></a>
             {% endfor %}
-            <p>Temas</p>
+            <p><span>Temas</span></p>
             {% for tema in temas %}
                 <a href="{% url 'filtro' tema.id %}"><li>{{tema.nome}}</li></a>
             {% endfor %}
@@ -61,6 +61,12 @@
         }
         p{
             margin-bottom: 0;
+        }
+        #navbar p{
+            margin: 1rem 0;
+        }
+        span{
+            font-weight: 500;
         }
         #jogos img{
             margin-right: 15px;

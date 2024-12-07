@@ -19,9 +19,9 @@
         <div>
             <a href="">Fóruns</a>
             <div>
-                <a href="">{{usuario.nome_usuario}}</a>
-                <p id="pizza">R${{usuario.conta}}</p>
-                <img src="{{usuario.perfil.url}}">
+                <a href="{% url 'perfil' %}">{{usuario.nome_usuario}}</a>
+                <p>R${{usuario.conta}}</p>
+                <a href="{% url 'perfil' %}"><img src="{{usuario.perfil.url}}"></a>
             </div>          
         </div>
     </header>
@@ -69,6 +69,9 @@
     header a:hover{
         
         color: white;
+    }
+    p{
+        margin-bottom: 0;
     }
 </style>
 </html>
