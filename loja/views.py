@@ -10,14 +10,19 @@ def index(request):
         return redirect('login')
     usuario_id = request.session['usuario_id']
     jogos_lista = Jogo.objects.all().order_by('nome')
-    paginator = Paginator(jogos_lista, 1)
+    form = Porcurarjogo(request.GET or None)
+    if form.is_valid():
+        nome = form.cleaned_data.get('nome')
+        if nome:
+            jogos_lista = jogos_lista.filter(nome__icontains=nome)
+    paginator = Paginator(jogos_lista, 5)
     page = request.GET.get('page', 1)
     try:
         jogos = paginator.page(page)
     except:
         jogos = paginator.page(1)
-    
     contexto = {
+        'form': form,
         'jogos': jogos,
         'generos': Genero.objects.all(),
         'temas': Tema.objects.all(),

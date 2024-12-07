@@ -4,7 +4,7 @@
 {% block content %}
     {% load static %}
     <div id="container">
-        <navbar>
+        <navbar id="navbar">
             <p>Gêneros</p>
             {% for genero in generos %}
                 <a href="{% url 'filtro2' genero.id %}"><li>{{genero.nome}}</li></a>
@@ -15,7 +15,10 @@
             {% endfor %}
         </navbar>
         <div id="principal">
-            <input placeholder="Buscar" type="text">
+            <form method="GET">
+                {{ form.as_p }}
+                <button type="submit">Buscar</button>
+            </form>
             <img src="{% static 'img/steam.png' %}" width="1000px" height="250px">
             {% for jogo in jogos %}
                 <a id="jogos" href="{% url 'pagina_jogo' jogo.id %}">
@@ -60,7 +63,7 @@
             grid-template-columns: repeat(7, 1fr);
             height: 100%;
         }
-        navbar{
+        #navbar{
             background-color: #002C89;
             grid-column: 1/2;
             height: 100%;
@@ -70,17 +73,17 @@
             align-items: center;
             list-style: none;
         }
-        navbar p{
+        #navbar p{
             font-size: 18px;
         }
-        navbar a {
+        #navbar a {
             text-decoration: none;
             color: white;
         }
-        navbar li{
+        #navbar li{
             margin-bottom: 5px;
         }
-        navbar li:hover{
+        #navbar li:hover{
             border-bottom: 1px solid white;
         }
         #principal{

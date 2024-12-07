@@ -20,7 +20,7 @@
             <a href="">Fóruns</a>
             <div>
                 <a href="">{{usuario.nome_usuario}}</a>
-                <p>R${{usuario.conta}}</p>
+                <p id="pizza">R${{usuario.conta}}</p>
                 <img src="{{usuario.perfil.url}}">
             </div>          
         </div>
@@ -28,7 +28,6 @@
     {% block content %}
     {% endblock %}
 </body>
-</html>
 <style>
     header div img{
         border-radius: 50%;
@@ -41,6 +40,12 @@
         display: flex;
         align-items: center;
     }
+    header div div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     body, html{
         margin: 0;
         padding: 0;
@@ -62,6 +67,8 @@
         transition: 0.1s;
     }
     header a:hover{
-        border-bottom: 2px solid white;
+        
+        color: white;
     }
 </style>
+</html>

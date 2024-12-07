@@ -25,3 +25,6 @@ class CadastroForm(forms.ModelForm):
 class LoginForm(forms.Form):
     nome_usuario = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Nome de Usuário'}))
     senha = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Senha'}))
+
+class Porcurarjogo(forms.Form):
+    nome = forms.CharField(max_length=100, required=False)
