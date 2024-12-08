@@ -39,3 +39,8 @@ class Usuario(models.Model):
     conta = models.FloatField(default=1000)
     def __str__(self):
         return self.nome
+
+class Anuncio(models.Model):
+    valor = models.FloatField(null=False)
+    jogo = models.ForeignKey(Jogo, on_delete= models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete= models.CASCADE)

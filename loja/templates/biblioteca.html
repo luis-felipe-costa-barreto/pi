@@ -4,7 +4,7 @@
     <div id="lista">
         {% for jogo in jogos %}
             {% if jogo in lista %}
-                <img src="{{jogo.imagem.url}}" width="220px" height="280">
+                <a href="{% url 'anunciar' jogo.id %}"><img src="{{jogo.imagem.url}}" width="220px" height="280"></a>
             {% endif %}
         {% endfor %}
     </div>

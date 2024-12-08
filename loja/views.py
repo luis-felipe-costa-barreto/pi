@@ -43,6 +43,19 @@ def pagina_jogo(request, id):
     }
     return render (request, 'pagina_jogo.html', contexto)
 
+def pagina_anuncio(request, id):
+    if 'usuario_id' not in request.session:
+        return redirect('login')
+    usuario_id = request.session['usuario_id']
+    anuncio = get_object_or_404(Anuncio, id = id)
+    contexto = {
+        'anuncio': anuncio,
+        'generos': Genero.objects.all(),
+        'temas': Tema.objects.all(),
+        'usuario': Usuario.objects.get(id=usuario_id)
+    }
+    return render (request, 'pagina_anuncio.html', contexto)
+
 def filtro(request, id):
     if 'usuario_id' not in request.session:
         return redirect('login')
@@ -146,6 +159,32 @@ def compra_jogo(request, jogo_id):
 
     return redirect('index')
 
+def compra_anuncio(request, anuncio_id):
+    if 'usuario_id' not in request.session:
+        return redirect('login') 
+    usuario_id = request.session['usuario_id']
+    usuario = Usuario.objects.get(id=usuario_id)
+    anuncio = get_object_or_404(Anuncio, id=anuncio_id)
+
+
+    if anuncio.jogo in usuario.jogos.all():
+        messages.error(request, 'Você já possui este jogo.')
+        return redirect('mercado')
+
+    if usuario.conta >= anuncio.valor:
+        usuario.conta -= anuncio.valor 
+        usuario.jogos.add(anuncio.jogo) 
+        usuario.save()
+        messages.success(request, f'Você comprou {anuncio.jogo.nome} com sucesso!')
+        anuncio.usuario.conta += anuncio.valor
+        anuncio.usuario.jogos.remove(anuncio.jogo)
+        anuncio.usuario.save()
+        anuncio.delete()
+    else:
+        messages.error(request, 'Saldo insuficiente para comprar este jogo.')
+
+    return redirect('mercado')
+
 def excluir_conta(request):
     if 'usuario_id' not in request.session:
         return redirect('login')
@@ -173,22 +212,42 @@ def perfil(request):
     }
     return render (request, 'perfil.html', contexto)
 
+def anunciar(request, id):
+    if 'usuario_id' not in request.session:
+        return redirect('login')
+    usuario_id = request.session['usuario_id']
+    usuario = Usuario.objects.get(id=usuario_id)
+    jogo = Jogo.objects.get(id=id)
+    
+    if request.method == 'POST':
+        form = AnuncioForm(request.POST)
+        if form.is_valid():
+            resultado = form.save(commit=False)
+            resultado.jogo = jogo
+            resultado.usuario = usuario
+            resultado.save()
+            return redirect('biblioteca')
+    else:
+        form = AnuncioForm()
+
+    contexto = {
+        'usuario': usuario,
+        'form': form,
+        'jogo': jogo
+    }
+    return render(request, 'anuncio.html', contexto)
+
 def mercado(request):
     if 'usuario_id' not in request.session:
         return redirect('login')
     usuario_id = request.session['usuario_id']
     usuario = Usuario.objects.get(id=usuario_id)
-    jogos_lista = Jogo.objects.all().order_by('nome')
-    form = Porcurarjogo(request.GET or None)
-    if form.is_valid():
-        nome = form.cleaned_data.get('nome')
-        if nome:
-            jogos_lista = jogos_lista.filter(nome__icontains=nome)
+    anuncios = Anuncio.objects.all()
     contexto = {
         'usuario': usuario,
         'generos': Genero.objects.all(),
         'temas': Tema.objects.all(),
-        'jogos': jogos_lista,
-        'form': form
+        'anuncios': anuncios
     }
     return render (request, 'mercado.html', contexto)
+

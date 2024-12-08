@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="principal">
+        <h5>Deseja anunciar {{jogo.nome}}? Se sim, descreva o preço abaixo:</h5>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Anunciar</button>
+        </form>
+    </div>
+    <style>
+        #principal{
+            padding: 20px;
+        }
+        input{
+            margin: 20px 0;
+        }
+    </style>
+{% endblock %}

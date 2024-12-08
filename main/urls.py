@@ -25,14 +25,17 @@ urlpatterns = [
     path('', index, name='index'),
     path('biblioteca/', biblioteca, name='biblioteca'),
     path('pagina_jogo/<int:id>', pagina_jogo, name='pagina_jogo'),
+    path('pagina_anuncio/<int:id>', pagina_anuncio, name='pagina_anuncio'),
     path('filtro/<int:id>', filtro, name='filtro'),
     path('filtro2/<int:id>', filtro2, name='filtro2'),
     path('cadastro/', cadastro, name='cadastro'),
     path('login/', login, name='login'),
     path('compra_jogo/<int:jogo_id>/', compra_jogo, name='compra_jogo'),
+    path('compra_anuncio/<int:anuncio_id>/', compra_anuncio, name='compra_anuncio'),
     path('excluir_conta/', excluir_conta, name='excluir_conta'),
     path('perfil/', perfil, name='perfil'),
     path('mercado/', mercado, name='mercado'),
+    path('anunciar/<int:id>', anunciar, name='anunciar'),
 ]
 
 if settings.DEBUG:

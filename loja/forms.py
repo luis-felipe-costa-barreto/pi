@@ -28,3 +28,8 @@ class LoginForm(forms.Form):
 
 class Porcurarjogo(forms.Form):
     nome = forms.CharField(max_length=100, required=False)
+
+class AnuncioForm(forms.ModelForm):
+    class Meta:
+        model = Anuncio
+        fields = ['valor']
